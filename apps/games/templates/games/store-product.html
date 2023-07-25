@@ -50,35 +50,45 @@
             </div>
             <div class="row">
                 <div class="text-center">
-                    <img src="{{ game.main_img.url }}" width="70%" class="rounded" alt="...">
+                    <img src="{{ game.main_img.url }}" width="350px" height="350px" class="rounded" alt="...">
                   </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row">
-                {% for img in additional_images %}
-                <div class="col-md-4 col-sm-12">
-                    <div class="modal" tabindex="-1">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title">{{ game.name }} скриншот</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="{{ img.url }}" class="img-fluid" alt="...">
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                              <button type="button" class="btn btn-primary">Сохранить изменения</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+        <br>
+        
+       <!-- Блок с картинкой -->
+       <div class="container">
+        <div class="row">
+            {% for image in additional_images %}
+            <div class="col-md-3 col-sm-12">
+                <div class="image-block">
+                    <img src="{{ image.img.url }}" alt="Картинка" class="img-thumbnail" width="250px" height="250px" data-bs-toggle="modal" data-bs-target="#{{ image.img.name }}">
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
+       </div>
+
+       {% for image in additional_images %}
+  <!-- Модальное окно -->
+  <div class="modal fade" id="{{ image.img.name }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ game.name }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="{{ image.img.url }}" width="500px" height="500px" alt="Картинка" class="img-fluid">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js" integrity="sha512-w0/EEWH5CDAq0sIsld2rO9KQJbHUa0uCCrO1vNDbByTgCeGG8MyUzCjB5XeRbIbJkbK61t3SsAlIam1HiChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+RMU9EP3NZdoeD9fIG4zRQfB07XaM9IfmTOd4BMyzvnng9h" crossorigin="anonymous"></script>
